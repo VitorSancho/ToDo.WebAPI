@@ -1,0 +1,14 @@
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\bin\Debug\net6.0\DevIO.Business.deps.json
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\bin\Debug\net6.0\DevIO.Business.runtimeconfig.json
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\bin\Debug\net6.0\DevIO.Business.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\bin\Debug\net6.0\DevIO.Business.pdb
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.csproj.AssemblyReference.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.AssemblyInfoInputs.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.AssemblyInfo.cs
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.csproj.CoreCompileInputs.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\refint\DevIO.Business.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.pdb
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\DevIO.Business.genruntimeconfig.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Business\obj\Debug\net6.0\ref\DevIO.Business.dll

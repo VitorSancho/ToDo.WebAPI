@@ -1,0 +1,17 @@
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Data.deps.json
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Data.runtimeconfig.json
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Data.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Data.pdb
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Business.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\bin\Debug\net6.0\DevIO.Business.pdb
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.csproj.AssemblyReference.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.AssemblyInfoInputs.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.AssemblyInfo.cs
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.csproj.CoreCompileInputs.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.csproj.CopyComplete
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\refint\DevIO.Data.dll
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.pdb
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\DevIO.Data.genruntimeconfig.cache
+D:\DesenvolvedorIO\Dominando\MinhaAppMvcCompleta\src\DevIO.Data\obj\Debug\net6.0\ref\DevIO.Data.dll
