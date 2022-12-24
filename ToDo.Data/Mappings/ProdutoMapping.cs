@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDo.Business.ViewModels;
+using ToDo.Business.Models;
 
 namespace ToDo.Data.Mappings
 {

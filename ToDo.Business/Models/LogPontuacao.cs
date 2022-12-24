@@ -6,7 +6,8 @@ namespace ToDo.Business.Models
         public bool FoiExecutada { get; set; }  
         public TimeOnly? Hr_execucao { get; set; }
 
-        public Tarefa Tarefa { get; set; }  
+        public Tarefa Tarefa { get; set; }
+        public Usuario Usuario { get; set; }
     }
 
 }

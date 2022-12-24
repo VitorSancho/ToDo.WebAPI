@@ -3,28 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ToDo.Business.Intefaces;
+using ToDo.Business.Models;
+using ToDo.Data.Context;
 
 namespace ToDo.Data.Repository
 {
-    public class UsuarioRepository : Repository<Produto>, IProdutoRepository
+    public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(MeuDbContext context) : base(context) { }
-
-        public async Task<Produto> ObterProdutoFornecedor(Guid id)
-        {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .FirstOrDefaultAsync(p => p.Id == id);
-        }
-
-        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
-        {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .OrderBy(p => p.Nome).ToListAsync();
-        }
-
-        public async Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
-        {
-            return await Buscar(p => p.FornecedorID == fornecedorId);
-        }
+        
     }
 }

@@ -3,28 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ToDo.Business.Intefaces;
+using ToDo.Business.Models;
+using ToDo.Data.Context;
 
 namespace ToDo.Data.Repository
 {
-    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
+    public class TarefaRepository : Repository<Tarefa>, ITarefaRepository
     {
-        public ProdutoRepository(MeuDbContext context) : base(context) { }
+        public TarefaRepository(MeuDbContext context) : base(context) { }
 
-        public async Task<Produto> ObterProdutoFornecedor(Guid id)
+        public async Task<IEnumerable<Tarefa>> ObterListaTarefasPorDificuldade(Guid dificuldadeId)
         {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            var tarefas = await Db.Tarefas.AsNoTracking()
+                            .Include(x => x.Dificuldade)
+                            .Where(x => x.Dificuldade.Id == dificuldadeId).ToListAsync();
+
+            return tarefas;
         }
 
-        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
+        public async Task<IEnumerable<Tarefa>> ObterListaTarefasPorUsuario(Guid usuarioId)
         {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .OrderBy(p => p.Nome).ToListAsync();
+            var tarefas = await Db.Tarefas.AsNoTracking()
+                .Include(x => x.Usuario)
+                .Where(x => x.Usuario.Id == usuarioId).ToListAsync();
+
+            return tarefas;
         }
 
-        public async Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
+        public async Task<Tarefa> ObterTarefaPorUsuario(Guid usuarioId)
         {
-            return await Buscar(p => p.FornecedorID == fornecedorId);
+            var tarefa = await Db.Tarefas.AsNoTracking()
+                .Include(x => x.Usuario)
+                .FirstOrDefaultAsync(x => x.Usuario.Id == usuarioId);
+
+            return tarefa;
         }
-    }
+    }    
 }

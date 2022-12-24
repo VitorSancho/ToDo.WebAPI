@@ -3,28 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using ToDo.Business.Intefaces;
+using ToDo.Business.Models;
+using ToDo.Data.Context;
 
 namespace ToDo.Data.Repository
 {
-    public class ProdutoRepository : Repository<Produto>, IProdutoRepository
+    public class LogPontuacaoRepository : Repository<LogPontuacao>, ILogPontuacaoRepository
     {
-        public ProdutoRepository(MeuDbContext context) : base(context) { }
+        public LogPontuacaoRepository(MeuDbContext context) : base(context) { }
 
-        public async Task<Produto> ObterProdutoFornecedor(Guid id)
+        public async Task<IEnumerable<LogPontuacao>> ObterListaLogPontuacaoPorUsuario(Guid usuarioId)
         {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            var logPontuacao = await Db.LogsPontuacao.AsNoTracking()
+                .Include(x => x.Usuario)
+                .Where(x => x.Usuario.Id == usuarioId).ToListAsync();
+
+            return logPontuacao;
         }
 
-        public async Task<IEnumerable<Produto>> ObterProdutosFornecedores()
+        public async Task<LogPontuacao> ObterLogPontuacaoPorTarefa(Guid tarefaId)
         {
-            return await Db.Produtos.AsNoTracking().Include(f => f.Fornecedor)
-                .OrderBy(p => p.Nome).ToListAsync();
-        }
+            var logPontuacao = await Db.LogsPontuacao.AsNoTracking()
+                .Include(x => x.Tarefa)
+                .FirstOrDefaultAsync(x => x.Tarefa.Id == tarefaId);
 
-        public async Task<IEnumerable<Produto>> ObterProdutosPorFornecedor(Guid fornecedorId)
-        {
-            return await Buscar(p => p.FornecedorID == fornecedorId);
+            return logPontuacao;
         }
     }
 }

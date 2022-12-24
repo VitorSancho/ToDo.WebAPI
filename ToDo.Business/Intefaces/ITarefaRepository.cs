@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ToDo.Business.ViewModels;
+using ToDo.Business.Models;
 
 namespace ToDo.Business.Intefaces
 {
     public interface ITarefaRepository: IRepository<Tarefa>
     {
-        Task<IEnumerable<Tarefa>> ObterProdutosPorFornecedor(Guid Id);
-        Task<IEnumerable<Tarefa>> ObterProdutosFornecedores();
-        Task<Tarefa> ObterProdutoFornecedor(Guid Id);
+        public Task<Tarefa> ObterTarefaPorUsuario(Guid usuarioId);
+        public Task<IEnumerable<Tarefa>> ObterListaTarefasPorUsuario(Guid usuarioId);
+        public Task<IEnumerable<Tarefa>> ObterListaTarefasPorDificuldade(Guid dificuldadeId);
     }
 }

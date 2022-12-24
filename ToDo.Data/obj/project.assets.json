@@ -3925,12 +3925,13 @@
     },
     "ToDo.Business/1.0.0": {
       "type": "project",
-      "path": "../DevIO.Business/ToDo.Business.csproj",
-      "msbuildProject": "../DevIO.Business/ToDo.Business.csproj"
+      "path": "../ToDo.Business/ToDo.Business.csproj",
+      "msbuildProject": "../ToDo.Business/ToDo.Business.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "D:\\DesenvolvedorIO\\ToDo.WebAPI\\DevIO.Business\\ToDo.Business.csproj",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.0",
       "Microsoft.EntityFrameworkCore >= 7.0.0",
       "Microsoft.EntityFrameworkCore.Relational >= 7.0.0",
@@ -4035,5 +4036,16 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1104",
+      "level": "Error",
+      "message": "Não é possível encontrar o projeto 'D:\\DesenvolvedorIO\\ToDo.WebAPI\\DevIO.Business\\ToDo.Business.csproj'. Verifique se a referência do projeto é válida e se o arquivo de projeto existe.",
+      "libraryId": "D:\\DesenvolvedorIO\\ToDo.WebAPI\\DevIO.Business\\ToDo.Business.csproj",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

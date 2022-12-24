@@ -1,8 +1,8 @@
-﻿using DevIO.Business.Intefaces;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using ToDo.Business.Context;
-using ToDo.Business.ViewModels;
+using ToDo.Business.Intefaces;
+using ToDo.Business.Models;
+using ToDo.Data.Context;
 
 namespace ToDo.Data.Repository
 {

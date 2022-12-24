@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ToDo.Business.Models;
 
-namespace ToDo.Business.Context
+namespace ToDo.Data.Context
 {
     public class MeuDbContext : DbContext
     {
@@ -17,8 +17,8 @@ namespace ToDo.Business.Context
 
         public DbSet<Usuario> Usuarios { get;set; }
         public DbSet<Tarefa> Tarefas { get; set; }
-        public DbSet<Dificuldade> Dificuldade { get; set; }
-        public DbSet<LogPontuacao> LogPontuacao { get; set; }
+        public DbSet<Dificuldade> Dificuldades { get; set; }
+        public DbSet<LogPontuacao> LogsPontuacao { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
