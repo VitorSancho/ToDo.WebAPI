@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using ToDo.Business.Intefaces;
 using ToDo.Data.Context;
 using ToDo.Data.Repository;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +30,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<MeuDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+{
+    options
+    .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), 
+                    b => b.MigrationsAssembly("ToDo.WebAPI"));
+}
 );
 
 builder.Services.AddMvc();

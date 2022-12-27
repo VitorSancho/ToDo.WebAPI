@@ -16,8 +16,8 @@ namespace ToDo.Data.Repository
         public async Task<IEnumerable<LogPontuacao>> ObterListaLogPontuacaoPorUsuario(Guid usuarioId)
         {
             var logPontuacao = await Db.LogsPontuacao.AsNoTracking()
-                .Include(x => x.Usuario)
-                .Where(x => x.Usuario.Id == usuarioId).ToListAsync();
+                .Include(x => x.Tarefa.Usuario)
+                .Where(x => x.Tarefa.UsuarioId == usuarioId).ToListAsync();
 
             return logPontuacao;
         }

@@ -27,9 +27,5 @@
     <ProjectReference Include="..\ToDo.Business\ToDo.Business.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
-
 
 </Project>

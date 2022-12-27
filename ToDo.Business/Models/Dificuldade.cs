@@ -9,6 +9,6 @@ namespace ToDo.Business.Models
 
         public Usuario Usuario { get; set; }
 
-        public Tarefa Tarefa { get; set; }
+        public IEnumerable<Tarefa> Tarefa { get; set; }
     }
 }
