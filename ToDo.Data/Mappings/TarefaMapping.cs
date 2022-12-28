@@ -26,10 +26,20 @@ namespace ToDo.Data.Mappings
             builder.Property(p => p.foiExecutada)
                         .IsRequired()
                         .HasColumnType("bit");
+            
+            // 1 : N => Usuario : Tarefas
+            builder.HasOne(f => f.Usuario)
+                .WithMany(p => p.Tarefas)
+                .HasForeignKey(p => p.UsuarioId);
 
             // 1 : 1 => Fornecedor : Endereco
             builder.HasOne(f => f.LogPontuacao)
                 .WithOne(e => e.Tarefa);
+
+            // N : 1 => Dificuldade : Tarefa
+            builder.HasOne(f => f.Dificuldade)
+                .WithMany(e => e.Tarefa)
+                .HasForeignKey(p => p.DificuldadeId);
 
             builder.ToTable("Tarefas");
         }

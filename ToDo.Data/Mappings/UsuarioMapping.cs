@@ -33,8 +33,7 @@ namespace ToDo.Data.Mappings
 
             // 1 : N => Usuario : Tarefas
             builder.HasMany(f => f.Tarefas)
-                .WithOne(p => p.Usuario)
-                .HasForeignKey(p => p.UsuarioId);
+                .WithOne(p => p.Usuario);
 
             builder.ToTable("Usuarios");
         }

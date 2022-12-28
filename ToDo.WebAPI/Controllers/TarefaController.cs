@@ -3,19 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
+using ToDo.Data.Repository;
 using ToDo.WebAPI.ViewModels;
 
 namespace ToDo.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class UsuarioController : MainController
+    public class TarefaController : MainController
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly ITarefaRepository _tarefaRepository;
         private readonly IMapper _mapper;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository, IMapper mapper)
+        public TarefaController(ITarefaRepository tarefasRepository, IMapper mapper)
         {
-            _usuarioRepository = usuarioRepository;
+            _tarefaRepository = tarefasRepository;
             _mapper = mapper;
         }
         [HttpGet]
@@ -24,45 +25,43 @@ namespace ToDo.WebAPI.Controllers
         {
             try
             {
-                var usuarios = _mapper.Map<IEnumerable<UsuarioViewModel>>(await _usuarioRepository.ObterTodos());
+                var tarefas = _mapper.Map<IEnumerable<TarefaViewModel>>(await _tarefaRepository.ObterTodos());
 
-
-                return Ok(usuarios);
+                return Ok(tarefas);
             }
             catch { return NotFound(); }
         }
 
         [HttpGet]
         [Route("[action]/{id}")]
-        public async Task<ActionResult> ObterUsuario(Guid id)
+        public async Task<ActionResult> ObterTarefa(Guid id)
         {
             try
             {
-                var usuarios = _mapper.Map<UsuarioViewModel>(await _usuarioRepository.ObterPorId(id));
+                var tarefa = _mapper.Map<UsuarioViewModel>(await _tarefaRepository.ObterPorId(id));
 
-                return Ok(usuarios);
+                return Ok(tarefa);
             }
             catch { return NotFound(); }
         }
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<ActionResult> InserirUsuario([FromBody] UsuarioViewModel usuario)
+        public async Task<ActionResult> InserirTarefa([FromBody] TarefaViewModel tarefa)
         {
-            var usuarioMapped = _mapper.Map<Usuario>(usuario);
-            await _usuarioRepository.Adicionar(usuarioMapped);
+            var tarefaMapped = _mapper.Map<Tarefa>(tarefa);
+            await _tarefaRepository.Adicionar(tarefaMapped);
 
                 return Ok();
-
         }
 
         [HttpDelete]
         [Route("[action]/{id}")]
-        public async Task<ActionResult> ApagarUsuario(Guid id)
+        public async Task<ActionResult> ApagarTarefa(Guid id)
         {
             try
             {
-                await _usuarioRepository.Remover(id);
+                await _tarefaRepository.Remover(id);
 
                 return Ok();
             }

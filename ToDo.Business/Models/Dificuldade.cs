@@ -7,8 +7,6 @@ namespace ToDo.Business.Models
         public string Nome { get; set; }
         public string  Pontos { get; set; }
 
-        public Usuario Usuario { get; set; }
-
         public IEnumerable<Tarefa> Tarefa { get; set; }
     }
 }

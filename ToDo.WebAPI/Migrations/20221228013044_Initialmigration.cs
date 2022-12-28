@@ -5,10 +5,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ToDo.WebAPI.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Initialmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Dificuldades",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Nome = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Pontos = table.Column<string>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dificuldades", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
@@ -23,25 +36,6 @@ namespace ToDo.WebAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Dificuldades",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Nome = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Pontos = table.Column<string>(type: "integer", nullable: false),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Dificuldades", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Dificuldades_Usuarios_UsuarioId",
-                        column: x => x.UsuarioId,
-                        principalTable: "Usuarios",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -87,11 +81,6 @@ namespace ToDo.WebAPI.Migrations
                         principalTable: "Tarefas",
                         principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Dificuldades_UsuarioId",
-                table: "Dificuldades",
-                column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LogsPontucao_TarefaId",
