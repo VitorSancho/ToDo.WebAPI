@@ -5,7 +5,7 @@ namespace ToDo.WebAPI.ViewModels
         public Guid TarefaId { get; set; }
         public TimeOnly? Hr_execucao { get; set; }
 
-        public TarefaViewModel Tarefa { get; set; }  
+        //public TarefaViewModel Tarefa { get; set; }  
     }
 
 }

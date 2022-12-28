@@ -10,7 +10,7 @@ namespace ToDo.WebAPI.ViewModels
         public string Hr_cadastroTarefas { get; set; }
         public string CEP { get; set; }
 
-        public IEnumerable<TarefaViewModel> Tarefas { get; set; }
+        //public IEnumerable<TarefaViewModel> Tarefas { get; set; }
 
     }
 }
