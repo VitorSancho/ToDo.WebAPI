@@ -6,7 +6,7 @@ using ToDo.WebAPI.ViewModels;
 
 namespace ToDo.WebAPI.Controllers
 {
-    [Route("api/fornecedores")]
+    [Route("api/[controller]")]
     public class UsuarioController : MainController
     {
         private readonly IUsuarioRepository _usuarioRepository;
@@ -17,6 +17,8 @@ namespace ToDo.WebAPI.Controllers
             _usuarioRepository =  usuarioRepository;
             _mapper = mapper;
         }
+        [HttpGet]
+        [Route("teste")]
         public async Task<ActionResult> ObterTodos()
         {
             var usuarios =  _mapper.Map<IEnumerable<UsuarioViewModel>>(await _usuarioRepository.ObterTodos());
