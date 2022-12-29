@@ -1,11 +1,10 @@
-﻿using DevIO.Business.Intefaces;
-using DevIO.Business.Models;
-using DevIO.Business.Notificacoes;
-using FluentValidation;
+﻿using FluentValidation;
 using FluentValidation.Results;
 using ToDo.Business.Intefaces;
+using ToDo.Business.Models;
+using ToDo.Business.Notificacoes;
 
-namespace DevIO.Business.Services
+namespace ToDo.Business.Services
 {
     public abstract class BaseService
     {

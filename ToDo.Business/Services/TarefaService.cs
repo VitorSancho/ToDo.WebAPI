@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
+using ToDo.Business.Models.Validations;
 
 namespace ToDo.Business.Services
 {
@@ -35,7 +36,7 @@ namespace ToDo.Business.Services
             await _TarefaRepository.Adicionar(fornecedor);
         }
 
-        public async Task Atualizar(Fornecedor fornecedor)
+        public async Task Atualizar(Tarefa fornecedor)
         {
             //if (!ExecutarValidacao(new FornecedorValidation(), fornecedor)) return;
 
@@ -48,26 +49,20 @@ namespace ToDo.Business.Services
             await _TarefaRepository.Atualizar(fornecedor);
         }
 
-        public async Task AtualizarEndereco(Endereco endereco)
+        public async Task AtualizarEndereco(Tarefa endereco)
         {
-            if (!ExecutarValidacao(new EnderecoValidation(), endereco)) return;
+            if (!ExecutarValidacao(new TarefaValidation(), endereco)) return;
 
             await _TarefaRepository.Atualizar(endereco);
         }
 
         public async Task Remover(Guid id)
         {
-            if (_TarefaRepository.ObterFornecedorProdutosEndereco(id).Result.Produtos.Any())
-            {
-                Notificar("O fornecedor possui produtos cadastrados!");
-                return;
-            }
+            var tarefa = await _TarefaRepository.ObterPorId(id);
 
-            var endereco = await _TarefaRepository.ObterEnderecoPorFornecedor(id);
-
-            if (endereco != null)
+            if (tarefa != null)
             {
-                await _TarefaRepository.Remover(endereco.Id);
+                await _TarefaRepository.Remover(tarefa.Id);
             }
 
             await _TarefaRepository.Remover(id);

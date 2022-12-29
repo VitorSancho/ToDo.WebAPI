@@ -1,18 +1,18 @@
-﻿using ToDo.Business.Intefaces;
+﻿
+using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
+using ToDo.Business.Services;
 
-namespace ToDo.Business.Services
+namespace DevIO.Business.Services
 {
     public class DificuldadeService : BaseService, IDificuldadeService
     {
         private readonly IDificuldadeRepository _dificuldadeRepository;
-        private readonly INotificador _notificador;
 
         public DificuldadeService(IDificuldadeRepository dificuldadeRepository, 
                                  INotificador notificador) : base(notificador)
         {
             _dificuldadeRepository = dificuldadeRepository;
-            _notificador = notificador;
         }
 
         public async Task Adicionar(Dificuldade dificuldade)
