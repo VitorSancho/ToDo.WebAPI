@@ -11,6 +11,7 @@ namespace ToDo.WebAPI.Controllers
     public class UsuarioController : MainController
     {
         private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
 
         public UsuarioController(IUsuarioRepository usuarioRepository, IMapper mapper)
@@ -33,7 +34,7 @@ namespace ToDo.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("[action]/{id}")]
+        [Route("[action]/{id:guid}")]
         public async Task<ActionResult> ObterUsuario(Guid id)
         {
             try
@@ -49,10 +50,13 @@ namespace ToDo.WebAPI.Controllers
         [Route("[action]")]
         public async Task<ActionResult> InserirUsuario([FromBody] UsuarioViewModel usuario)
         {
+
+            if (! ModelState.IsValid) return BadRequest();
+
             var usuarioMapped = _mapper.Map<Usuario>(usuario);
             await _usuarioRepository.Adicionar(usuarioMapped);
 
-                return Ok();
+            return Ok();
 
         }
 
