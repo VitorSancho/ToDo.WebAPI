@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using ToDo.Api.Controllers;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
 using ToDo.WebAPI.ViewModels;
@@ -13,12 +14,17 @@ namespace ToDo.WebAPI.Controllers
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioService _usuarioService;
         private readonly IMapper _mapper;
+        private readonly INotificador _notificador;
 
-        public UsuarioController(IUsuarioRepository usuarioRepository, IMapper mapper)
+        public UsuarioController(IUsuarioRepository usuarioRepository, IMapper mapper, INotificador notificador)
+            : base(notificador)
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
+            _notificador = notificador;
         }
+
+        /// <summary> Obtém todos os usuarios </summary>
         [HttpGet]
         [Route("[action]")]
         public async Task<ActionResult> ObterTodos()
@@ -51,12 +57,27 @@ namespace ToDo.WebAPI.Controllers
         public async Task<ActionResult> InserirUsuario([FromBody] UsuarioViewModel usuario)
         {
 
-            if (! ModelState.IsValid) return BadRequest();
+            if (! ModelState.IsValid) return CustomResponse(usuario);
 
             var usuarioMapped = _mapper.Map<Usuario>(usuario);
             await _usuarioRepository.Adicionar(usuarioMapped);
 
-            return Ok();
+            return CustomResponse(usuario);
+
+        }
+
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult> AtualizarUsuario(Guid id,UsuarioViewModel usuario)
+        {
+            if (id != usuario.Id) return BadRequest();
+
+            if (!ModelState.IsValid) return CustomResponse(usuario);
+
+            var usuarioMapped = _mapper.Map<Usuario>(usuario);
+            await _usuarioRepository.Atualizar(usuarioMapped);
+
+            return CustomResponse(usuario);
 
         }
 
@@ -64,13 +85,12 @@ namespace ToDo.WebAPI.Controllers
         [Route("[action]/{id}")]
         public async Task<ActionResult> ApagarUsuario(Guid id)
         {
-            try
-            {
-                await _usuarioRepository.Remover(id);
+            var consulta = ObterUsuario(id);
+            
+            
+            await _usuarioRepository.Remover(id);
 
-                return Ok();
-            }
-            catch { return NotFound(); }
+            return Ok();
         }
     }
 }

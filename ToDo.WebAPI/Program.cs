@@ -1,6 +1,11 @@
+using DevIO.Business.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using ToDo.Business.Intefaces;
+using ToDo.Business.Notificacoes;
+using ToDo.Business.Services;
 using ToDo.Data.Context;
 using ToDo.Data.Repository;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -38,11 +43,24 @@ builder.Services.AddDbContext<MeuDbContext>(options =>
 );
 
 builder.Services.AddMvc();
+// Retira da aplicação a validação default dos modelos -> coloca nas nossas mãos a validação
+builder.Services.Configure<ApiBehaviorOptions>
+(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
+builder.Services.AddScoped<INotificador, Notificador>();
 builder.Services.AddScoped<MeuDbContext>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddScoped<ITarefaRepository, TarefaRepository>();
 builder.Services.AddScoped<ILogPontuacaoRepository, LogPontuacaoRepository>();
 builder.Services.AddScoped<IDificuldadeRepository, DificuldadeRepository>();
+
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<ITarefaService, TarefaService>();
+builder.Services.AddScoped<ILogPontuacaoService, LogPontuacaoService>();
+builder.Services.AddScoped<IDificuldadeService, DificuldadeService>();
 
 builder.Services.AddRazorPages();
 

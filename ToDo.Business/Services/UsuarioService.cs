@@ -3,36 +3,36 @@ using ToDo.Business.Models;
 
 namespace ToDo.Business.Services
 {
-    public class DificuldadeService : BaseService, IDificuldadeService
+    public class UsuarioService : BaseService, IUsuarioService
     {
-        private readonly IDificuldadeRepository _dificuldadeRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
         private readonly INotificador _notificador;
 
-        public DificuldadeService(IDificuldadeRepository dificuldadeRepository, 
+        public UsuarioService(IUsuarioRepository usuarioRepository, 
                                  INotificador notificador) : base(notificador)
         {
-            _dificuldadeRepository = dificuldadeRepository;
+            _usuarioRepository = usuarioRepository;
             _notificador = notificador;
         }
 
-        public async Task Adicionar(Dificuldade dificuldade)
+        public async Task Adicionar(Usuario usuario)
         {
-            await _dificuldadeRepository.Adicionar(dificuldade);
+            await _usuarioRepository.Adicionar(usuario);
         }
 
-        public async Task Atualizar(Dificuldade dificuldade)
+        public async Task Atualizar(Usuario usuario)
         {
-            await _dificuldadeRepository.Atualizar(dificuldade);
+            await _usuarioRepository.Atualizar(usuario);
         }
 
         public void Dispose()
         {
-            _dificuldadeRepository?.Dispose();
+            _usuarioRepository?.Dispose();
         }
 
         public async Task Remover(Guid id)
         {
-            await _dificuldadeRepository.Remover(id);
+            await _usuarioRepository.Remover(id);
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace ToDo.WebAPI.ViewModels
 {
-    public class TarefaViewModel
+    public class TarefaViewModel : EntityViewModel
     {
         public Guid UsuarioId { get; set; }
         public string Nome { get; set; }

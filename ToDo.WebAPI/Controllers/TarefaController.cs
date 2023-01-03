@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
+using ToDo.Api.Controllers;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
-using ToDo.Data.Repository;
 using ToDo.WebAPI.ViewModels;
 
 namespace ToDo.WebAPI.Controllers
@@ -13,11 +12,14 @@ namespace ToDo.WebAPI.Controllers
     {
         private readonly ITarefaRepository _tarefaRepository;
         private readonly IMapper _mapper;
+        private readonly INotificador _notificador;
 
-        public TarefaController(ITarefaRepository tarefasRepository, IMapper mapper)
+        public TarefaController(ITarefaRepository tarefasRepository, IMapper mapper, INotificador notificador)
+            : base(notificador)
         {
             _tarefaRepository = tarefasRepository;
             _mapper = mapper;
+            _notificador = notificador;
         }
         [HttpGet]
         [Route("[action]")]
@@ -49,10 +51,25 @@ namespace ToDo.WebAPI.Controllers
         [Route("[action]")]
         public async Task<ActionResult> InserirTarefa([FromBody] TarefaViewModel tarefa)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             var tarefaMapped = _mapper.Map<Tarefa>(tarefa);
             await _tarefaRepository.Adicionar(tarefaMapped);
 
-                return Ok();
+            return Ok();
+        }
+
+        [HttpPut("id:guid")]
+        public async Task<ActionResult> AtualizarTarefa(Guid id,TarefaViewModel tarefa)
+        {
+            if (id != tarefa.Id) return BadRequest();
+
+            if (!ModelState.IsValid) return BadRequest();
+
+            var tarefaMapped = _mapper.Map<Tarefa>(tarefa);
+            await _tarefaRepository.Adicionar(tarefaMapped);
+
+            return Ok();
         }
 
         [HttpDelete]
