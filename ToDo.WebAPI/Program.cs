@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Notificacoes;
 using ToDo.Business.Services;
@@ -94,3 +96,4 @@ app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();
+

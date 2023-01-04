@@ -40,7 +40,8 @@ namespace ToDo.WebAPI.Controllers
         {
             try
             {
-                var tarefa = _mapper.Map<UsuarioViewModel>(await _tarefaRepository.ObterPorId(id));
+                var tarefaEncontrada = await _tarefaRepository.ObterPorId(id);
+                var tarefa = _mapper.Map<TarefaViewModel>(tarefaEncontrada);
 
                 return Ok(tarefa);
             }
