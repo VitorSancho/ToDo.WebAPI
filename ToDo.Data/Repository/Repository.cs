@@ -36,8 +36,7 @@ namespace ToDo.Data.Repository
 
         public virtual async Task<TEntity> ObterPorId(Guid Id)
         {
-            var tarefaEncontrada = await DbSet.FindAsync(Id);
-            return tarefaEncontrada;
+            return await DbSet.FindAsync(Id);
         }
 
         public virtual async Task<List<TEntity>> ObterTodos()

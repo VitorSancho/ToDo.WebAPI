@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ToDo.Api.Controllers;
@@ -8,6 +9,7 @@ using ToDo.WebAPI.ViewModels;
 
 namespace ToDo.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class UsuarioController : MainController
     {
