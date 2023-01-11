@@ -2,14 +2,16 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using ToDo.App.Extensions;
 using ToDo.Api.Controllers;
+using ToDo.App.Extensions;
 using ToDo.Business.Intefaces;
 using ToDo.Business.Models;
 using ToDo.WebAPI.ViewModels;
 
 namespace ToDo.WebAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class UsuarioController : MainController
     {
@@ -27,6 +29,7 @@ namespace ToDo.WebAPI.Controllers
         }
 
         /// <summary> Obtém todos os usuarios </summary>
+        [ClaimsAuthorize("Usuario", "Leitura")]
         [HttpGet]
         [Route("[action]")]
         public async Task<ActionResult> ObterTodos()
@@ -54,6 +57,7 @@ namespace ToDo.WebAPI.Controllers
             catch { return NotFound(); }
         }
 
+        [ClaimsAuthorize("Usuario","Inserir")]
         [HttpPost]
         [Route("[action]")]
         public async Task<ActionResult> InserirUsuario([FromBody] UsuarioViewModel usuario)
@@ -68,7 +72,7 @@ namespace ToDo.WebAPI.Controllers
 
         }
 
-
+        [ClaimsAuthorize("Usuario", "Atualizar")]
         [HttpPut("{id:guid}")]
         public async Task<ActionResult> AtualizarUsuario(Guid id,UsuarioViewModel usuario)
         {
