@@ -19,7 +19,9 @@ namespace ToDo.Data.Mappings
                         .IsRequired()
                         .HasColumnType("time");
 
-
+            // 1 : N => Usuario : Tarefas
+            builder.HasOne(f => f.Tarefa)
+                .WithOne(p => p.LogPontuacao);
 
             builder.ToTable("LogsPontucao");
         }

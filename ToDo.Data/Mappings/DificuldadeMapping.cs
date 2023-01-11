@@ -25,8 +25,7 @@ namespace ToDo.Data.Mappings
 
             // 1 : N => Fornecedor : Produtos
             builder.HasMany(f => f.Tarefa)
-                .WithOne(p => p.Dificuldade)
-                .HasForeignKey(p => p.DificuldadeId);
+                .WithOne(p => p.Dificuldade);
 
             builder.ToTable("Dificuldades");
         }

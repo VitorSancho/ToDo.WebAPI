@@ -36,12 +36,7 @@ namespace ToDo.WebAPI.Migrations
                         .IsRequired()
                         .HasColumnType("integer");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Dificuldades", (string)null);
                 });
@@ -126,16 +121,6 @@ namespace ToDo.WebAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Usuarios", (string)null);
-                });
-
-            modelBuilder.Entity("ToDo.Business.Models.Dificuldade", b =>
-                {
-                    b.HasOne("ToDo.Business.Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("ToDo.Business.Models.LogPontuacao", b =>
