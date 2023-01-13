@@ -17,6 +17,10 @@ using ToDo.WebAPI.NovaPasta;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using ToDo.WebApi.Extensions;
+using Microsoft.EntityFrameworkCore.Internal;
+using System.Reflection;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +45,45 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    var security = new Dictionary<string, IEnumerable<string>>
+    {
+        {"Berarer ", new string[]{ } }
+    };
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Insira o token JWT desde maneira: Bearer {seu token}",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+      {
+        {
+          new OpenApiSecurityScheme
+          {
+            Reference = new OpenApiReference
+              {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+              },
+              Scheme = "Bearer",
+              Name = "Bearer",
+              In = ParameterLocation.Header,
+
+            },
+            new List<string>()
+          }
+        });
+});
+
+
 
 builder.Services.AddDbContext<MeuDbContext>(options =>
 {
@@ -69,6 +112,30 @@ builder.Services.Configure<ApiBehaviorOptions>
 (options =>
 {
     options.SuppressModelStateInvalidFilter = true;
+});
+
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified= true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true;
+});
+
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl= true;
+});
+
+builder.Services.AddCors
+(options =>
+{
+    options.AddPolicy("Development",
+        builder=>
+        builder
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowAnyOrigin());
 });
 
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
@@ -109,6 +176,9 @@ builder.Services.AddScoped<ITarefaService, TarefaService>();
 builder.Services.AddScoped<ILogPontuacaoService, LogPontuacaoService>();
 builder.Services.AddScoped<IDificuldadeService, DificuldadeService>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<IUser, AspNetUser>();
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -116,12 +186,14 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors("Development");
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseDeveloperExceptionPage();
+    app.UseDeveloperExceptionPage(); 
 }
 else
 {
+    app.UseCors("Production");
     app.UseExceptionHandler("/erro/500");
     app.UseStatusCodePagesWithRedirects("/erro/{0}");
     app.UseHsts();
@@ -141,6 +213,12 @@ app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.UseAuthentication();
+
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json","My API v1");
+});
 
 app.Run();
 
