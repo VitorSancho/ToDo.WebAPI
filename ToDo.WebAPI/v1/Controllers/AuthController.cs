@@ -18,16 +18,19 @@ namespace ToDo.WebAPI.v1.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly ILogger _logger;
 
         public AuthController(INotificador notificador
                                 , UserManager<IdentityUser> userManager
                                 , SignInManager<IdentityUser> signInManager
                                 , IOptions<AppSettings> appSettings
-                                , IUser user) : base(notificador, user)
+                                , IUser user,
+                                ILogger<AuthController> logger) : base(notificador, user)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _logger = logger;
         }
 
         [HttpPost("nova-conta")]
@@ -69,10 +72,12 @@ namespace ToDo.WebAPI.v1.Controllers
                             , true);
             if (result.Succeeded)
             {
+                _logger.LogInformation("Login executado com sucesso!");
                 return CustomResponse(await GerarJwt(loginUser.Email));
             }
             if (result.IsLockedOut)
             {
+                
                 NotificarErro("Usuáriotemporariamente bloqueado por tentativas inválidas");
                 return CustomResponse(loginUser);
             }

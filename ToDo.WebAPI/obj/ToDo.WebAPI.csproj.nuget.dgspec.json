@@ -267,6 +267,18 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Elmah.Io": {
+              "target": "Package",
+              "version": "[4.3.40, )"
+            },
+            "Elmah.Io.AspNetCore": {
+              "target": "Package",
+              "version": "[4.3.48, )"
+            },
+            "Elmah.Io.extensions.logging": {
+              "target": "Package",
+              "version": "[4.2.36, )"
+            },
             "FluentValidation": {
               "target": "Package",
               "version": "[10.3.6, )"

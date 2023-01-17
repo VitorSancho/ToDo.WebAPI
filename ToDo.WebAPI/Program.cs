@@ -21,6 +21,7 @@ using ToDo.WebApi.Extensions;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using ToDo.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -164,6 +165,8 @@ builder.Services.AddAuthentication(x =>
 }
 );
 
+builder.Services.AddLoggingConfiguration();
+
 builder.Services.AddScoped<INotificador, Notificador>();
 builder.Services.AddScoped<MeuDbContext>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
@@ -180,6 +183,7 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IUser, AspNetUser>();
 
 builder.Services.AddRazorPages();
+
 
 var app = builder.Build();
 
@@ -219,6 +223,9 @@ app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json","My API v1");
 });
+
+
+app.UseLoggingConfigutration();
 
 app.Run();
 
